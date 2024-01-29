@@ -1,12 +1,14 @@
 import { Express } from "express";
-import Auth from "./auth";
-import Common from "./common";
-import Rtsp from "./rtsp";
+import auth from "./auth";
+import common from "./common";
+import rtsp from "./rtsp";
+import todo from "./todo";
 
 const action = (app: Express) => {
-  Auth(app);
-  Common(app);
-  Rtsp(app);
+  app.use("/api/v1/auth", auth);
+  app.use("/api/v1/common", common);
+  app.use("/api/v1/rtsp", rtsp);
+  app.use("/api/v1/todo", todo);
 };
 
 export default action;

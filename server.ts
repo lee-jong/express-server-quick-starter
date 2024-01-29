@@ -39,6 +39,6 @@ io.on("connection", (socket: any) => {
 
 action(app);
 http.listen(port, () => {
-  rtsp.init();
+  // rtsp.init();
   console.log(`connected at ${port}`);
 });

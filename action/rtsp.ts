@@ -1,18 +1,18 @@
-import { Express } from "express";
+import express from "express";
 import global from "../util/global";
 
-const Rtsp = (app: Express) => {
-  app.get("/rtsp/info", (req, res) => {
-    const data = {
-      client_total: global.rtspClients,
-      rtsp_info: global.rtspInfo,
-    };
-    global.logger.info("GET - RTSP INFO", data);
-    return res.json({
-      status: 200,
-      data,
-    });
-  });
-};
+const router = express.Router();
 
-export default Rtsp;
+router.route("/info").get((req, res) => {
+  const data = {
+    client_total: global.rtspClients,
+    rtsp_info: global.rtspInfo,
+  };
+  global.logger.info("GET - RTSP INFO", data);
+  return res.json({
+    status: 200,
+    data,
+  });
+});
+
+export default router;
