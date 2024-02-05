@@ -1,6 +1,6 @@
 import express from "express";
 import rtsp from "./helper/rtsp";
-import action from "./route/index";
+import route from "./route/index";
 import interceptor from "./interceptor/index";
 import errorHandle from "./interceptor/error";
 import helmet from "helmet";
@@ -37,7 +37,7 @@ io.on("connection", (socket: any) => {
   });
 });
 
-action(app);
+route(app);
 http.listen(port, () => {
   // rtsp.init();
   console.log(`connected at ${port}`);
