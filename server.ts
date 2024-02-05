@@ -1,6 +1,6 @@
 import express from "express";
 import rtsp from "./helper/rtsp";
-import action from "./action/index";
+import action from "./route/index";
 import interceptor from "./interceptor/index";
 import errorHandle from "./interceptor/error";
 import helmet from "helmet";
