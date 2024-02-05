@@ -6,5 +6,8 @@ class Global {
 
   //
   public static logger = logger;
+
+  // DB 화
+  public static todoList = [{ idx: 1, title: "제목" }];
 }
 export default Global;
