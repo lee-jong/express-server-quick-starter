@@ -1,14 +1,20 @@
 import { Request, Response } from "express";
 import global from "../util/global";
 import { handleStatus } from "../util/status";
+import db from "../database";
 
 export const getTodoList = (req: Request, res: Response) => {
-  const data = {
-    list: global.todoList,
-  };
-  res.status(200).json({
-    status: 200,
-    data,
+  const sql = "select * from  public.list where user_id like '1'";
+  db.query(sql, (err, result) => {
+    try {
+      if (err) throw 500;
+      res.status(200).json({
+        status: 200,
+        data: result.rows,
+      });
+    } catch (e: any) {
+      res.status(e).json(handleStatus(e));
+    }
   });
 };
 
@@ -22,7 +28,6 @@ export const createTodo = (req: Request, res: Response) => {
       title,
     };
     global.todoList.push(setData);
-    console.log("#", global.todoList);
     res.status(200).json({
       status: 200,
       data: "success",
@@ -42,6 +47,18 @@ export const deleteTodo = (req: Request, res: Response) => {
     res.status(200).json({
       status: 200,
       data: "success",
+    });
+  } catch (e: any) {
+    res.status(e).json(handleStatus(e));
+  }
+};
+
+export const getTogetherTodo = (req: Request, res: Response) => {
+  try {
+    const roomId: number = Number(req.query.roomId);
+    if (!roomId) throw 400;
+    res.status(200).json({
+      data: global.togetherTodoList[roomId],
     });
   } catch (e: any) {
     res.status(e).json(handleStatus(e));
